@@ -12,7 +12,7 @@ function TodoApp() {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const response = await axios.get("http://localhost:3500/todos");
+        const response = await axios.get("http://localhost:3500/api/todos");
         setTodos(response.data); // update todos state after loading the page
       } catch (error) {
         console.error("Error fetching todos:", error);
@@ -26,7 +26,7 @@ function TodoApp() {
   // Create a new todo
   const handleAddTodo = async () => {
     try {
-      const response = await axios.post("http://localhost:3500/todos" ,{ title: newTodo });
+      const response = await axios.post("http://localhost:3500/api/todos" ,{ title: newTodo });
       setTodos([...todos, response.data]); // Update the todo state with the new todo
       setNewTodo(''); // Clear input field
       toast.success('Todo added successfully!'); // Display success toast message
@@ -39,7 +39,7 @@ function TodoApp() {
   // Delete a todo
   const handleDeleteTodo = async (id) => {
     try {
-      await axios.delete(`http://localhost:3500/todos/${id}`);
+      await axios.delete(`http://localhost:3500/api/todos/${id}`);
       setTodos(todos.filter((todo) => todo._id !== id)); //update todo state by filtering the deleted todo
       toast.success('Todo deleted successfully!'); // Display success toast message
     } catch (error) {
